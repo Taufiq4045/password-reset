@@ -26,11 +26,8 @@ const service= {
         let expiry= new Date(Date.now()+ (1*3600*1000) )
         //updating the users table with resetToken and resetExpire
         let data= await mongo.users.findOneAndUpdate({email:user.email},{$set:{resetToken:hashToken,resetExpire:expiry}},{ReturnDocument: "after" })
-        console.log(data)
-    
-       // const link=`https://gracious-keller-611545.netlify.app/resetPassword/${user._id}/${token}`
-
-        const link=`http://localhost:3000/resetPassword/${user._id}/${token}`
+        
+        const link=`https://password-rest.netlify.app/resetPassword/${user._id}/${token}`
         
         await sendMail(user.email,"Password Reset",link)
     
